@@ -1,5 +1,6 @@
 package com.example.studymate
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
@@ -61,6 +62,7 @@ class LoginSSOActivity : AppCompatActivity() {
 
 
     }
+
     fun loginSSo() {
         val sharedPreferences = getSharedPreferences("StudyMatePrefs", MODE_PRIVATE)
         val token = sharedPreferences.getString("idToken", null)
