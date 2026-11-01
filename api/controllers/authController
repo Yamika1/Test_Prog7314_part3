@@ -194,6 +194,8 @@ const loginSSO = async (req, res, next) => {
         next(error);
     }
 };
+
+
 const getProfile = async (req, res, next) => {
   try {
     const user = await User.findById(req.user.id).select('fullName email role createdAt');
@@ -205,6 +207,7 @@ if (!user) {
     next(error);
   }
 };
+
 module.exports = {
     register,
     login,
