@@ -11,12 +11,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import android.content.SharedPreferences
+
 
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import androidx.core.content.edit
+
+import androidx.credentials.CredentialManager
 
 
 class MainActivity : AppCompatActivity() {
@@ -27,10 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var textviewRegister : TextView
     private lateinit var loginEmail:EditText
 
-    private lateinit var sharedPreferences: SharedPreferences
-
-
-  
+    private lateinit var credentialManager: CredentialManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,12 +36,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
        setContentView(R.layout.activity_main)
 
-sharedPreferences = getSharedPreferences("StudyMatePrefs", MODE_PRIVATE)
-        loginEmail = findViewById<EditText>(R.id.loginEmail)
-        loginPassword = findViewById<EditText>(R.id.loginPassword)
-        btnLogin = findViewById<Button>(R.id.btnLogin)
-        btnSSO = findViewById<Button>(R.id.btnSSO)
-        textviewRegister = findViewById<TextView>(R.id.textviewRegister)
+        credentialManager = CredentialManager.create(this@MainActivity)
 
         btnLogin.setOnClickListener {
 
@@ -64,18 +57,19 @@ sharedPreferences = getSharedPreferences("StudyMatePrefs", MODE_PRIVATE)
         }
 
         btnSSO.setOnClickListener {
-            val intent = Intent(this, LoginSSOActivity::class.java)
-            startActivity(intent)
+          googleSSO()
         }
-
-
-
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+
+    private fun googleSSO()
+    {
+
     }
 
 
@@ -86,14 +80,6 @@ sharedPreferences = getSharedPreferences("StudyMatePrefs", MODE_PRIVATE)
             override fun onResponse(p0: Call<LoginResponse?>, p1: Response<LoginResponse?>) {
                     if (p1.isSuccessful){
                         val user = p1.body()!!.data
-
-                        sharedPreferences.edit {
-                            putString("firstName", user.firstName)
-                                .putString("lastName", user.lastName)
-                                .putString("email", user.email)
-                                .putString("idToken", user.token)
-                                .putString("refreshToken", user.refreshToken)
-                        }
 
                         Toast.makeText(this@MainActivity,"Login Successful!",Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@MainActivity, HomeActivity::class.java)
