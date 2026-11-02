@@ -2,7 +2,6 @@ const admin = require('../config/firebase');
 
 const register = async (req, res, next) => {
     try{
-        
         const {firstName, lastName, username, email, password} = req.body;
 
         if(!firstName || !lastName || !email || !username|| !password){
@@ -47,7 +46,7 @@ res.status(201).json({
         id: user.uid,
         firstName: user.displayName.split(' ')[0],
         lastName: user.displayName.split(' ')[1],
-        username : user.username,
+        username: user.username,
         email: user.email,
         role: 'user'
     }
@@ -183,9 +182,9 @@ const loginSSO = async (req, res, next) => {
         });
     } catch (error) {
         if(
-           error.code === 'auth/id-token-expired' ||
-           error.code === 'auth/argument-error'||
-           error.code === 'auth/invalid-id-token' 
+error.code === 'auth/id-token-expired' ||
+error.code === 'auth/argument-error'||
+error.code === 'auth/invalid-id-token' 
         ){
             return res.status(401).json({
                 error: 'Invalid or expired Firebase ID token'
@@ -194,8 +193,6 @@ const loginSSO = async (req, res, next) => {
         next(error);
     }
 };
-
-
 const getProfile = async (req, res, next) => {
   try {
     const user = await User.findById(req.user.id).select('fullName email role createdAt');
@@ -207,7 +204,6 @@ if (!user) {
     next(error);
   }
 };
-
 module.exports = {
     register,
     login,
