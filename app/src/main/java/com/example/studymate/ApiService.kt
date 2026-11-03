@@ -47,7 +47,7 @@ val message: String,
 var token: String
 )
 
-data class LoginSSO(
+data class LoginSSORequest(
     val idToken: String?
 )
 
@@ -67,5 +67,5 @@ interface ApiService {
      fun register(@Body request: RegisterRequest) : Call<RegisterResponse>
 
     @POST("./api/auth/login/sso")
-    fun loginSSO(@Body request: LoginSSO) : Call<LoginResponse>
+    fun loginSSO(@Body request: LoginSSORequest) : Call<LoginResponse>
 }

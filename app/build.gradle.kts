@@ -53,7 +53,8 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.4.0")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation(libs.firebase.database)
-    implementation(libs.google.googleid)
+    implementation(libs.googleid)
+
 
 
     implementation(libs.material)

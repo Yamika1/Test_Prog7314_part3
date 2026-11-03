@@ -12,7 +12,20 @@
           "package_name": "com.example.studymate"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "893238927336-dmvach5sv11qrej67ogapt8dkjtvh8an.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.studymate",
+            "certificate_hash": "c159131fe761ba8c7d8bda2adfc87f79e83a1251"
+          }
+        },
+        {
+          "client_id": "893238927336-vjs333u1n6q40m1oskdqkvdgkn5astn5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDhxBRe9rQz3wpE3MGIGj118qKgTI7clvo"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "893238927336-vjs333u1n6q40m1oskdqkvdgkn5astn5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
