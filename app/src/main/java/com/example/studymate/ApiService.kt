@@ -1,3 +1,4 @@
+
 package com.example.studymate
 
 import retrofit2.Call
@@ -14,7 +15,7 @@ data class HealthResponse(
 
 data class LoginRequest(
     val email: String,
-    val  password: String
+    val password: String
 )
 
 data class LoginResponse(
@@ -43,28 +44,33 @@ data class RegisterRequest(
 )
 
 data class RegisterResponse(
-val message: String,
-var token: String
+    val message: String,
+    val data: RegisterData
+)
+
+data class RegisterData(
+    val id: String,
+    val firstName: String,
+    val lastName: String,
+    val username: String?,
+    val email: String,
+    val role: String
 )
 
 data class LoginSSORequest(
     val idToken: String?
 )
 
-
-
 interface ApiService {
 
-    @GET("/health")
-   suspend fun checkHealth(): Response<HealthResponse>
+    @GET("health")
+    suspend fun checkHealth(): Response<HealthResponse>
 
+    @POST("api/auth/login")
+    fun login(@Body request: LoginRequest): Call<LoginResponse>
 
-    @POST("./api/auth/login")
-    fun login(@Body request: LoginRequest) : Call<LoginResponse>
-
-
-    @POST("./api/auth/register")
-     fun register(@Body request: RegisterRequest) : Call<RegisterResponse>
+    @POST("api/auth/register")
+    fun register(@Body request: RegisterRequest): Call<RegisterResponse>
 
     @POST("./api/auth/login/sso")
     fun loginSSO(@Body request: LoginSSORequest) : Call<LoginResponse>
