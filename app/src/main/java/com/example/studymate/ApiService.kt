@@ -57,7 +57,7 @@ data class RegisterData(
     val role: String
 )
 
-data class LoginSSO(
+data class LoginSSORequest(
     val idToken: String?
 )
 
@@ -72,6 +72,6 @@ interface ApiService {
     @POST("api/auth/register")
     fun register(@Body request: RegisterRequest): Call<RegisterResponse>
 
-    @POST("api/auth/login/sso")
-    fun loginSSO(@Body request: LoginSSO): Call<LoginResponse>
+    @POST("./api/auth/login/sso")
+    fun loginSSO(@Body request: LoginSSORequest) : Call<LoginResponse>
 }

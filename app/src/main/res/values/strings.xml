@@ -84,7 +84,7 @@
     <string name="mark_as_complete">Mark as Complete</string>
     <string name="edit_task">Edit Task</string>
     <string name="delete_task">Delete Task</string>
-
+    <string name="web_client_key">893238927336-vjs333u1n6q40m1oskdqkvdgkn5astn5.apps.googleusercontent.com</string>
 
     <string name="already_have_an_account_login">Already have an account? Login Here</string>
     <string name="sign_in_to_continue_to_your_account">Sign in to continue to your account</string>
