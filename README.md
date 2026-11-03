@@ -1,12 +1,15 @@
 StudyMate 
 
-StudyMate is an android application designed to manage academic tasks to help students organise, manage and track their tasks in one place.
+Demonstration link: 
 
-The application has user friendly interfaces to create tasks,view upcoming tasks, view task details, monitor their progress and manage in-app settings.
+StudyMate is an android application designed to manage academic tasks to help students organise, manage and track their tasks in one place.The application has user friendly interfaces to create tasks,view upcoming tasks, view task details, monitor their progress and manage in-app settings.
+
+
+StudyMate is developed as a part of our Programming 3D Portfolio of Evidence. Built using Android Studio and Kotlin with XML layouts for the UI and a Node.js REST API for backend communication.
 
 Project Overview
 
-StudyMate is developed as a part of our Programming 3D POE. This version focuses on Part 2 as a fully functional prototype where interface mock screens were implemented as the user interface using Android Studio xml layouts and the necessary backend code for activities and fragment all together with an API made using Node.js
+StudyMate is an academic tool that aims to help students as a central platform to manage tasks and track progress. The application features account management, a home dashboard, task management, a progress dashboard and settings.
 
 Features
 
@@ -29,7 +32,13 @@ Features
 
 6. Settings - provides options for students to recieve notifications, offline mode, dark mode, multi language, biometric authentication (which will be implemented in Part 03)
 
+7. Biometric authentication to support biometric logins
 
+8. Offline functionality and sutomatic synchronisation
+
+9. Notifications
+
+10. Multi-language support
 
 
 
