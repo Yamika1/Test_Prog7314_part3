@@ -76,7 +76,7 @@
         android:layout_marginTop="18dp" />
 
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogin"
         android:layout_width="0dp"
         android:layout_height="58dp"
@@ -85,7 +85,8 @@
         android:textStyle="bold"
         android:textColor="@android:color/white"
         android:textAllCaps="false"
-        android:background="@drawable/rounded_black"
+        app:backgroundTint="@color/black"
+        app:cornerRadius="30dp"
         app:layout_constraintTop_toBottomOf="@id/loginPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +95,7 @@
         android:layout_marginTop="25dp" />
 
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSSO"
         android:layout_width="0dp"
         android:layout_height="58dp"
@@ -103,7 +104,8 @@
         android:textStyle="bold"
         android:textColor="@android:color/white"
         android:textAllCaps="false"
-        android:background="@drawable/rounded_black"
+        app:backgroundTint="@color/black"
+        app:cornerRadius="30dp"
         app:layout_constraintTop_toBottomOf="@id/btnLogin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -121,8 +123,8 @@
         android:focusable="true"
         android:minHeight="48dp"
         android:text="@string/don_t_have_an_account_register"
-        android:textColor="@android:color/black"
-        android:textSize="15sp"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

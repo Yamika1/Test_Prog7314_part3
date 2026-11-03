@@ -146,6 +146,7 @@
         android:textColor="@android:color/white"
         android:textSize="17sp"
         android:textStyle="bold"
+        android:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -154,20 +155,21 @@
 
     <TextView
         android:id="@+id/textviewLogin"
-        android:layout_width="254dp"
-        android:layout_height="48dp"
+        android:layout_width="310dp"
+        android:layout_height="37dp"
         android:clickable="true"
         android:focusable="true"
         android:minHeight="48dp"
         android:text="@string/already_have_an_account_login"
-        android:textColor="@android:color/black"
-        android:textSize="15sp"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnRegister"
-        app:layout_constraintVertical_bias="0.196" />
+        app:layout_constraintVertical_bias="0.363" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
@@ -175,8 +177,10 @@
         android:layout_height="902dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.602" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
