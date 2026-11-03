@@ -1,0 +1,9 @@
+services:
+  api:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      FIREBASE_API_KEY: AIzaSyDhxBRe9rQz3wpE3MGIGj118qKgTI7clvo
+    volumes:
+      - ./serviceAccountKey.json:/app/serviceAccountKey.json:ro
