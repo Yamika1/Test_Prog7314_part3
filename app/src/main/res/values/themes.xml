@@ -22,4 +22,9 @@
 
     <style name="Theme.StudyMate" parent="Base.Theme.StudyMate" />
 
+
+    <style name="textView_style">
+        <item name="android:textColor">#474545</item>
+    </style>
+
 </resources>
