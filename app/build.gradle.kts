@@ -57,7 +57,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
-
+    implementation("androidx.biometric:biometric:1.1.0")
     val room_version = "2.8.4"
     implementation("androidx.room:room-runtime:$room_version")
 

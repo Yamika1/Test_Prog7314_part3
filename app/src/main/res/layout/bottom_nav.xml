@@ -7,7 +7,7 @@
     android:layout_height="76dp"
     android:orientation="horizontal"
     android:gravity="center"
-    android:background="@color/studymate_background"
+    android:background="@drawable/background_1"
     android:elevation="10dp"
     android:paddingTop="6dp"
     android:paddingBottom="6dp">
@@ -20,7 +20,7 @@
         android:text="@string/_10_home"
         android:gravity="center"
         android:textColor="@color/studymate_primary"
-        android:textSize="12sp"
+        android:textSize="15sp"
         android:textStyle="bold" />
 
     <TextView
@@ -31,7 +31,7 @@
         android:text="@string/_10_tasks"
         android:gravity="center"
         android:textColor="@color/studymate_text_grey"
-        android:textSize="12sp" />
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/navAddTask"
@@ -41,7 +41,7 @@
         android:text="@string/_10_add_task"
         android:gravity="center"
         android:textColor="@color/studymate_text_grey"
-        android:textSize="12sp"
+        android:textSize="15sp"
         android:textStyle="bold" />
 
     <TextView
@@ -52,7 +52,7 @@
         android:text="@string/_10_progress"
         android:gravity="center"
         android:textColor="@color/studymate_text_grey"
-        android:textSize="12sp" />
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/navSettings"
@@ -62,6 +62,6 @@
         android:text="@string/_10_settings"
         android:gravity="center"
         android:textColor="@color/studymate_text_grey"
-        android:textSize="12sp" />
+        android:textSize="15sp" />
 
 </LinearLayout>
