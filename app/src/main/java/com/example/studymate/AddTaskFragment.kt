@@ -12,11 +12,13 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
 class AddTaskFragment : Fragment() {
+
     private lateinit var taskName: EditText
     private lateinit var taskDescription: EditText
     private lateinit var spCategory: Spinner
@@ -25,21 +27,48 @@ class AddTaskFragment : Fragment() {
     private lateinit var btnSaveTask: Button
     private lateinit var backToHome: Button
 
-    private var editingTaskId: Long? = null
+    private lateinit var taskViewModel: TaskAddViewModel
 
+    private var editingTaskId: Int? = null
+    private var existingTask: TaskAdd? = null
 
+    private val categories = arrayListOf(
+        "Wellness",
+        "Fitness",
+        "Academic",
+        "Work",
+        "Personal"
+    )
+
+    private val priorities = arrayListOf(
+        "High",
+        "Medium",
+        "Low"
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        editingTaskId = arguments?.getLong("taskId")?.takeIf { it != 0L }
+
+        editingTaskId = arguments?.getInt("taskId")?.takeIf { it != 0 }
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View = inflater.inflate(R.layout.fragment_add_task, container, false)
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        return inflater.inflate(
+            R.layout.fragment_add_task,
+            container,
+            false
+        )
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        taskViewModel =
+            ViewModelProvider(this)[TaskAddViewModel::class.java]
 
         taskName = view.findViewById(R.id.taskName)
         taskDescription = view.findViewById(R.id.taskDescription)
@@ -49,45 +78,85 @@ class AddTaskFragment : Fragment() {
         btnSaveTask = view.findViewById(R.id.btnSaveTask)
         backToHome = view.findViewById(R.id.backToHome)
 
-        val categories = arrayListOf("Wellness", "Fitness", "Academic", "Work", "Personal")
         spCategory.adapter = ArrayAdapter(
-            requireContext(), android.R.layout.simple_spinner_item, categories
-        ).apply { setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            categories
+        ).apply {
+            setDropDownViewResource(
+                android.R.layout.simple_spinner_dropdown_item
+            )
+        }
 
-        val priorities = arrayListOf("High", "Medium", "Low")
         spinnerPriority.adapter = ArrayAdapter(
-            requireContext(), android.R.layout.simple_spinner_item, priorities
-        ).apply { setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            priorities
+        ).apply {
+            setDropDownViewResource(
+                android.R.layout.simple_spinner_dropdown_item
+            )
+        }
 
-        dueDate.setOnClickListener { showDatePicker() }
+        dueDate.setOnClickListener {
+            showDatePicker()
+        }
 
         editingTaskId?.let { id ->
-            TaskStorage.getTask(requireContext(), id)?.let { task ->
-                taskName.setText(task.name)
-                taskDescription.setText(task.description)
-                dueDate.setText(task.dueDate)
-                spCategory.setSelection(categories.indexOf(task.category).coerceAtLeast(0))
-                spinnerPriority.setSelection(priorities.indexOf(task.priority).coerceAtLeast(0))
-                btnSaveTask.text = "Update Task"
-            }
+            taskViewModel.getTaskById(id)
+                .observe(viewLifecycleOwner) { task ->
+
+                    if (task != null) {
+                        existingTask = task
+
+                        taskName.setText(task.name)
+                        taskDescription.setText(task.description)
+                        dueDate.setText(task.dueDate)
+
+                        spCategory.setSelection(
+                            categories.indexOf(task.category)
+                                .coerceAtLeast(0)
+                        )
+
+                        spinnerPriority.setSelection(
+                            priorities.indexOf(task.priority)
+                                .coerceAtLeast(0)
+                        )
+
+                        btnSaveTask.text = "Update Task"
+                    }
+                }
         }
 
         backToHome.setOnClickListener {
-            startActivity(Intent(requireContext(), HomeActivity::class.java))
+            startActivity(
+                Intent(requireContext(), HomeActivity::class.java)
+            )
         }
 
-        btnSaveTask.setOnClickListener { saveTask() }
+        btnSaveTask.setOnClickListener {
+            saveTask()
+        }
     }
 
     private fun showDatePicker() {
+
         val calendar = Calendar.getInstance()
+
         DatePickerDialog(
             requireContext(),
             { _, year, month, day ->
-                val selected = Calendar.getInstance().apply {
+
+                val selectedDate = Calendar.getInstance().apply {
                     set(year, month, day)
                 }
-                dueDate.setText(SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(selected.time))
+
+                val formattedDate = SimpleDateFormat(
+                    "dd/MM/yyyy",
+                    Locale.getDefault()
+                ).format(selectedDate.time)
+
+                dueDate.setText(formattedDate)
             },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
@@ -96,44 +165,54 @@ class AddTaskFragment : Fragment() {
     }
 
     private fun saveTask() {
+
         val name = taskName.text.toString().trim()
         val description = taskDescription.text.toString().trim()
         val date = dueDate.text.toString().trim()
+
         val category = spCategory.selectedItem.toString()
         val priority = spinnerPriority.selectedItem.toString()
 
         if (name.isEmpty()) {
-            Toast.makeText(requireContext(), "Task Name is required", Toast.LENGTH_SHORT).show()
+            taskName.error = "Task Name is required"
+            taskName.requestFocus()
             return
         }
+
         if (date.isEmpty()) {
-            Toast.makeText(requireContext(), "Due Date is required", Toast.LENGTH_SHORT).show()
+            dueDate.error = "Due Date is required"
             return
         }
 
-        val context = requireContext()
-        val existing = editingTaskId?.let { TaskStorage.getTask(context, it) }
+        val previousTask = existingTask
 
-        val task = Task(
-            id = existing?.id ?: System.currentTimeMillis(),
+        val task = TaskAdd(
+            id = previousTask?.id ?: 0,
             name = name,
             description = description,
             category = category,
             priority = priority,
             dueDate = date,
-            completed = existing?.completed ?: false
+            status = previousTask?.status ?: "Incomplete"
         )
 
-        if (existing == null) {
-            TaskStorage.addTask(context, task)
-            Toast.makeText(context, "New Task Created!", Toast.LENGTH_SHORT).show()
+        if (previousTask == null) {
+            taskViewModel.addTask(task)
         } else {
-            TaskStorage.updateTask(context, task)
-            Toast.makeText(context, "Task Updated!", Toast.LENGTH_SHORT).show()
+            taskViewModel.updateTask(task)
         }
 
+        Toast.makeText(
+            requireContext(),
+            if (previousTask == null) "Task saved" else "Task updated",
+            Toast.LENGTH_SHORT
+        ).show()
+
         parentFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainerView, TaskFragment())
+            .replace(
+                R.id.fragmentContainerView,
+                TaskFragment()
+            )
             .commit()
     }
 }
