@@ -17,3 +17,5 @@ certs/
 .externalNativeBuild
 .cxx
 local.properties
+*.keystore
+!app/debug.keystore
