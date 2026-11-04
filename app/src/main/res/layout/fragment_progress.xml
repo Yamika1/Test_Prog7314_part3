@@ -233,18 +233,7 @@
 
     </ScrollView>
 
-    <Button
-        android:id="@+id/backToHome"
-        android:layout_width="97dp"
-        android:layout_height="40dp"
-        android:text="Home"
-        android:background="@drawable/rounded_black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.89"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.033" />
+
 
 
     <include
