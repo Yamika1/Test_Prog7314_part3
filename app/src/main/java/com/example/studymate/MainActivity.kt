@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var loginEmail:EditText
 
     private lateinit var credentialManager: CredentialManager
+    private lateinit var btnFingerprint: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         textviewRegister = findViewById(R.id.textviewRegister)
         loginEmail = findViewById(R.id.loginEmail)
         loginPassword = findViewById(R.id.loginPassword)
+        btnFingerprint = findViewById(R.id.button)
 
 
         btnLogin.setOnClickListener {
@@ -72,6 +74,10 @@ class MainActivity : AppCompatActivity() {
 
         btnSSO.setOnClickListener {
            googleSSO()
+        }
+
+        btnFingerprint.setOnClickListener {
+            startActivity(Intent(this, FingerprintLogin::class.java))
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
