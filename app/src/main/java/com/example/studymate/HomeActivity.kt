@@ -45,6 +45,8 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var addTask: TextView
     private lateinit var progress: TextView
 
+    private lateinit var focus: TextView
+
 
 
 
@@ -72,6 +74,7 @@ class HomeActivity : AppCompatActivity() {
         tasks = findViewById<TextView>(R.id.tasks)
         addTask = findViewById<TextView>(R.id.addTask)
         progress = findViewById<TextView>(R.id.progress)
+        focus = findViewById<TextView>(R.id.navFocus)
 
 
         setting.setOnClickListener {
@@ -92,6 +95,11 @@ class HomeActivity : AppCompatActivity() {
         progress.setOnClickListener {
             supportFragmentManager.beginTransaction().replace(R.id.fragmentContainerView,
                 ProgressFragment()).commit()
+        }
+        focus.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, FocusFragment())
+                .commit()
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

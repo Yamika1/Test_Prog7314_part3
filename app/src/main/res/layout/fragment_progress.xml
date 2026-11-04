@@ -75,7 +75,7 @@
 
                         <TextView
                             android:id="@+id/textviewCompletionPercentage"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:textColor="@android:color/black"

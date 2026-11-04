@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import android.widget.TextView
 
 class AddTaskFragment : Fragment() {
 
@@ -77,6 +78,11 @@ class AddTaskFragment : Fragment() {
         spinnerPriority = view.findViewById(R.id.spinnerPriority)
         btnSaveTask = view.findViewById(R.id.btnSaveTask)
         backToHome = view.findViewById(R.id.backToHome)
+        view.findViewById<TextView>(R.id.navFocus).setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, FocusFragment())
+                .commit()
+        }
 
         spCategory.adapter = ArrayAdapter(
             requireContext(),

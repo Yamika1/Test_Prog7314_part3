@@ -29,6 +29,7 @@ class TaskFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View = inflater.inflate(R.layout.fragment_task, container, false)
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -43,9 +44,14 @@ class TaskFragment : Fragment() {
 
         adapter = TaskAdapter(emptyList()) { task ->
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainerView, TaskDetailsFragment().apply {
-                    arguments = Bundle().apply { putLong("taskId", task.id) }
-                })
+                .replace(
+                    R.id.fragmentContainerView,
+                    TaskDetailsFragment().apply {
+                        arguments = Bundle().apply {
+                            putLong("taskId", task.id)
+                        }
+                    }
+                )
                 .addToBackStack(null)
                 .commit()
         }
@@ -53,14 +59,55 @@ class TaskFragment : Fragment() {
         taskRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         taskRecyclerView.adapter = adapter
 
-        filterAll.setOnClickListener { selectedFilter = "All"; refreshTasks() }
-        filterAssignments.setOnClickListener { selectedFilter = "Academic"; refreshTasks() }
-        filterTests.setOnClickListener { selectedFilter = "Tests"; refreshTasks() }
-        filterExams.setOnClickListener { selectedFilter = "Exams"; refreshTasks() }
-        searchTasks.setOnEditorActionListener { _, _, _ -> refreshTasks(); false }
+        // Focus Mode navigation
+        view.findViewById<TextView>(R.id.navFocus).setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, FocusFragment())
+                .commit()
+        }
+
+        filterAll.setOnClickListener {
+            selectedFilter = "All"
+            refreshTasks()
+        }
+
+        filterAssignments.setOnClickListener {
+            selectedFilter = "Academic"
+            refreshTasks()
+        }
+
+        filterTests.setOnClickListener {
+            selectedFilter = "Tests"
+            refreshTasks()
+        }
+
+        filterExams.setOnClickListener {
+            selectedFilter = "Exams"
+            refreshTasks()
+        }
+
+        searchTasks.setOnEditorActionListener { _, _, _ ->
+            refreshTasks()
+            false
+        }
+
         searchTasks.addTextChangedListener(object : android.text.TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { refreshTasks() }
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) = Unit
+
+            override fun onTextChanged(
+                s: CharSequence?,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
+                refreshTasks()
+            }
+
             override fun afterTextChanged(s: android.text.Editable?) = Unit
         })
 

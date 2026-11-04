@@ -54,6 +54,18 @@
         android:textColor="@color/studymate_text_grey"
         android:textSize="15sp" />
 
+
+    <TextView
+        android:id="@+id/navFocus"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="⚡ Focus"
+        android:gravity="center"
+        android:textColor="@color/studymate_text_grey"
+        android:textSize="15sp" />
+
+
     <TextView
         android:id="@+id/navSettings"
         android:layout_width="0dp"
