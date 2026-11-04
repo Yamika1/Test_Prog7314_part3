@@ -47,7 +47,6 @@ class TaskFragment : Fragment() {
         filterExams = view.findViewById(R.id.filterExams)
         taskRecyclerView = view.findViewById(R.id.taskRecyclerView)
         emptyTaskMessage = view.findViewById(R.id.emptyTaskMessage)
-        backToHome = view.findViewById(R.id.backToHome)
 
         adapter = TaskAdapter(emptyList()) { task ->
             parentFragmentManager.beginTransaction()
