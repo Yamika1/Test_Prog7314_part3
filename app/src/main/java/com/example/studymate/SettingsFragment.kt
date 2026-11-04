@@ -8,12 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import com.google.firebase.auth.FirebaseAuth
 
 
 class SettingsFragment : Fragment() {
 
 
     private lateinit var btnDarkModeArrow: ImageButton
+
+    private lateinit var btnLogout: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,9 +36,16 @@ class SettingsFragment : Fragment() {
 
         btnDarkModeArrow = view.findViewById(R.id.btnDarkModeArrow)
 
+        btnLogout = view.findViewById(R.id.btnLogout)
+
 
         btnDarkModeArrow.setOnClickListener {
             startActivity(Intent(requireContext(), DarkMode::class.java))
+        }
+
+        btnLogout.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            startActivity(Intent(requireContext(), MainActivity::class.java))
         }
     }
 
