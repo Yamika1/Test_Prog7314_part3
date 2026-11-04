@@ -85,6 +85,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        startServer()
     }
 
 
@@ -97,48 +98,77 @@ class MainActivity : AppCompatActivity() {
           val request = GetCredentialRequest.Builder().addCredentialOption(googleIdOption).build()
 
        lifecycleScope.launch {
-       val result = credentialManager.getCredential(this@MainActivity, request)
+           try {
+               val result = credentialManager.getCredential(this@MainActivity, request)
 
-       val credential = result.credential
+               val credential = result.credential
 
-       val googleCredential = GoogleIdTokenCredential.createFrom(credential.data)
-       val firebaseCredential = GoogleAuthProvider.getCredential(googleCredential.idToken,null)
+               val googleCredential = GoogleIdTokenCredential.createFrom(credential.data)
+               val firebaseCredential = GoogleAuthProvider.getCredential(googleCredential.idToken, null)
 
-       FirebaseAuth.getInstance().signInWithCredential(firebaseCredential).addOnSuccessListener { result ->
-        result.user?.getIdToken(false)?.addOnSuccessListener { tokenResult ->
-            val firebaseIdToken = tokenResult.token
+               FirebaseAuth.getInstance().signInWithCredential(firebaseCredential)
+                   .addOnSuccessListener { result ->
+                       result.user?.getIdToken(false)?.addOnSuccessListener { tokenResult ->
 
-            val apiRequest = LoginSSORequest(idToken = firebaseIdToken )
+                           val firebaseIdToken = tokenResult.token
 
-            RetroFitClient.api.loginSSO(apiRequest).enqueue(object : Callback<LoginResponse?> {
+                           val apiRequest = LoginSSORequest(idToken = firebaseIdToken)
+                           RetroFitClient.api.loginSSO(apiRequest).enqueue(object : Callback<LoginResponse?> {
 
-                override fun onResponse(p0: Call<LoginResponse?>, p1: Response<LoginResponse?>) {
-                    if (p1.isSuccessful) {
-                        Toast.makeText(this@MainActivity, "Google Sign-In Successful!", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this@MainActivity, HomeActivity::class.java)
-                        startActivity(intent)
+                                   override fun onResponse(p0: Call<LoginResponse?>, p1: Response<LoginResponse?>) {
+                                       if (p1.isSuccessful) {
+                                           Toast.makeText(this@MainActivity, "Google Sign-In Successful!",
+                                               Toast.LENGTH_SHORT
+                                           ).show()
+                                           val intent = Intent(this@MainActivity, HomeActivity::class.java)
+                                           startActivity(intent)
 
-                    } else {
-                        Toast.makeText(this@MainActivity, "Google Sign-In cancelled or failed: ${p1.message()}", Toast.LENGTH_SHORT).show()
-                    }
+                                       } else {
+                                           Toast.makeText(
+                                               this@MainActivity,
+                                               "Google Sign-In failed. API Error: ${p1.message()}",
+                                               Toast.LENGTH_SHORT
+                                           ).show()
+                                       }
 
-                }
+                                   }
 
-                override fun onFailure(p0: Call<LoginResponse?>, t: Throwable) {
-                    Toast.makeText(this@MainActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
-                }
-            })
+                                   override fun onFailure(p0: Call<LoginResponse?>, t: Throwable) {
+                                       Toast.makeText(
+                                           this@MainActivity, "Error: ${t.message}",
+                                           Toast.LENGTH_SHORT
+                                       ).show()
+                                   }
+                               })
 
-        }?.addOnFailureListener { e ->
-            Toast.makeText(
-                this@MainActivity, "Google SSO cancelled or failed: ${e.message}",
-                Toast.LENGTH_SHORT).show()
-        }
-        }
+                       }?.addOnFailureListener { e ->
+                           Toast.makeText(
+                               this@MainActivity, "SSO Token Failure: ${e.message}",
+                               Toast.LENGTH_SHORT
+                           ).show()
+                       }
 
+                   }.addOnFailureListener { e ->
+                   Toast.makeText(
+                       this@MainActivity, "SSO Firebase Failure: ${e.message}",
+                       Toast.LENGTH_SHORT
+                   ).show()
+               }
+           }catch (e:Exception){
+               Toast.makeText(
+                   this@MainActivity, "Google SSO cancelled or failed: ${e.message}",
+                   Toast.LENGTH_SHORT
+               ).show()
+           }
        }
 
       }
+
+    fun startServer(){
+        lifecycleScope.launch {
+            RetroFitClient.api.checkHealth()
+        }
+    }
 
             fun login(email: String, password: String) {
                 val request = LoginRequest(email = email, password = password)
