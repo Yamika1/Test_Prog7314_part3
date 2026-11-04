@@ -39,7 +39,7 @@ class ProgressFragment : Fragment() {
         textviewIncompleteTasks = view.findViewById(R.id.textviewIncompleteTasks)
         tvOverdueTasks = view.findViewById(R.id.tvOverdueTasks)
         recentTasksContainer = view.findViewById(R.id.recentTasksContainer)
-        backToHome = view.findViewById(R.id.backToHome)
+
         view.findViewById<TextView>(R.id.navFocus).setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainerView, FocusFragment())

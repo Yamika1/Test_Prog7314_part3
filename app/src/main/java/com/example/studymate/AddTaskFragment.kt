@@ -79,7 +79,7 @@ class AddTaskFragment : Fragment() {
         spCategory = view.findViewById(R.id.spCategory)
         spinnerPriority = view.findViewById(R.id.spinnerPriority)
         btnSaveTask = view.findViewById(R.id.btnSaveTask)
-        backToHome = view.findViewById(R.id.backToHome)
+
         view.findViewById<TextView>(R.id.navFocus).setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainerView, FocusFragment())
