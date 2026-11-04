@@ -22,7 +22,7 @@ class TaskFragment : Fragment() {
     private lateinit var filterExams: Button
     private lateinit var taskRecyclerView: RecyclerView
     private lateinit var emptyTaskMessage: TextView
-    private lateinit var backToHome: Button
+
     private lateinit var adapter: TaskAdapter
     private lateinit var taskViewModel: TaskAddViewModel
 
@@ -115,10 +115,6 @@ class TaskFragment : Fragment() {
 
             override fun afterTextChanged(s: android.text.Editable?) = Unit
         })
-
-        backToHome.setOnClickListener {
-            startActivity(Intent(requireContext(), HomeActivity::class.java))
-        }
 
         taskViewModel.allTasks.observe(viewLifecycleOwner) { tasks ->
             allTasks = tasks

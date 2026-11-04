@@ -23,7 +23,6 @@ class ProgressFragment : Fragment() {
     private lateinit var textviewIncompleteTasks: TextView
     private lateinit var tvOverdueTasks: TextView
     private lateinit var recentTasksContainer: ViewGroup
-    private lateinit var backToHome: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -47,10 +46,6 @@ class ProgressFragment : Fragment() {
         }
 
 
-        backToHome.setOnClickListener {
-            startActivity(Intent(requireContext(), HomeActivity::class.java))
-
-        }
 
         updateDashboard()
     }

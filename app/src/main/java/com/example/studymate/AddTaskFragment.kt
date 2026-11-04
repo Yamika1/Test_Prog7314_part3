@@ -28,7 +28,6 @@ class AddTaskFragment : Fragment() {
     private lateinit var spinnerPriority: Spinner
     private lateinit var dueDate: EditText
     private lateinit var btnSaveTask: Button
-    private lateinit var backToHome: Button
 
     private lateinit var taskViewModel: TaskAddViewModel
 
@@ -136,11 +135,7 @@ class AddTaskFragment : Fragment() {
                 }
         }
 
-        backToHome.setOnClickListener {
-            startActivity(
-                Intent(requireContext(), HomeActivity::class.java)
-            )
-        }
+
 
         btnSaveTask.setOnClickListener {
             saveTask()
