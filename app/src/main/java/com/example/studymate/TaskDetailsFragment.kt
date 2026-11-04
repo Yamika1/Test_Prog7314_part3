@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 
 class TaskDetailsFragment : Fragment() {
 
-    private lateinit var btnBack: Button
+    private lateinit var btnBack: TextView
 
     private lateinit var textviewTaskName: TextView
     private lateinit var textviewTaskDescription: TextView

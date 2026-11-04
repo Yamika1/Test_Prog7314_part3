@@ -19,7 +19,7 @@
         android:layout_weight="1"
         android:text="@string/_10_home"
         android:gravity="center"
-        android:textColor="@color/studymate_primary"
+        android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="bold" />
 
@@ -30,8 +30,9 @@
         android:layout_weight="1"
         android:text="@string/_10_tasks"
         android:gravity="center"
-        android:textColor="@color/studymate_text_grey"
-        android:textSize="15sp" />
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/navAddTask"
@@ -40,7 +41,7 @@
         android:layout_weight="1"
         android:text="@string/_10_add_task"
         android:gravity="center"
-        android:textColor="@color/studymate_text_grey"
+        android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="bold" />
 
@@ -51,8 +52,9 @@
         android:layout_weight="1"
         android:text="@string/_10_progress"
         android:gravity="center"
-        android:textColor="@color/studymate_text_grey"
-        android:textSize="15sp" />
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"/>
 
 
     <TextView
@@ -73,7 +75,8 @@
         android:layout_weight="1"
         android:text="@string/_10_settings"
         android:gravity="center"
-        android:textColor="@color/studymate_text_grey"
-        android:textSize="15sp" />
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"/>
 
 </LinearLayout>

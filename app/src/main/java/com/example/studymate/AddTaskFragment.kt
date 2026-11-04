@@ -1,5 +1,7 @@
 package com.example.studymate
 
+
+
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
@@ -26,7 +28,6 @@ class AddTaskFragment : Fragment() {
     private lateinit var spinnerPriority: Spinner
     private lateinit var dueDate: EditText
     private lateinit var btnSaveTask: Button
-    private lateinit var backToHome: Button
 
     private lateinit var taskViewModel: TaskAddViewModel
 
@@ -77,7 +78,7 @@ class AddTaskFragment : Fragment() {
         spCategory = view.findViewById(R.id.spCategory)
         spinnerPriority = view.findViewById(R.id.spinnerPriority)
         btnSaveTask = view.findViewById(R.id.btnSaveTask)
-        backToHome = view.findViewById(R.id.backToHome)
+
         view.findViewById<TextView>(R.id.navFocus).setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainerView, FocusFragment())
@@ -134,11 +135,7 @@ class AddTaskFragment : Fragment() {
                 }
         }
 
-        backToHome.setOnClickListener {
-            startActivity(
-                Intent(requireContext(), HomeActivity::class.java)
-            )
-        }
+
 
         btnSaveTask.setOnClickListener {
             saveTask()

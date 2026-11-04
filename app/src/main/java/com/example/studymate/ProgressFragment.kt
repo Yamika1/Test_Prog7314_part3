@@ -23,7 +23,6 @@ class ProgressFragment : Fragment() {
     private lateinit var textviewIncompleteTasks: TextView
     private lateinit var tvOverdueTasks: TextView
     private lateinit var recentTasksContainer: ViewGroup
-    private lateinit var backToHome: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -39,7 +38,7 @@ class ProgressFragment : Fragment() {
         textviewIncompleteTasks = view.findViewById(R.id.textviewIncompleteTasks)
         tvOverdueTasks = view.findViewById(R.id.tvOverdueTasks)
         recentTasksContainer = view.findViewById(R.id.recentTasksContainer)
-        backToHome = view.findViewById(R.id.backToHome)
+
         view.findViewById<TextView>(R.id.navFocus).setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainerView, FocusFragment())
@@ -47,10 +46,6 @@ class ProgressFragment : Fragment() {
         }
 
 
-        backToHome.setOnClickListener {
-            startActivity(Intent(requireContext(), HomeActivity::class.java))
-
-        }
 
         updateDashboard()
     }
