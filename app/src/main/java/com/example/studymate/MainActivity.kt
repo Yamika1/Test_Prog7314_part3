@@ -77,7 +77,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnFingerprint.setOnClickListener {
-            startActivity(Intent(this, FingerprintLogin::class.java))
+            if (BiometricSetting.isFingerprintEnabled(this)) {
+                startActivity(Intent(this, FingerprintLogin::class.java))
+            } else {
+                Toast.makeText(
+                    this,
+                    "Turn on fingerprint login in Settings first.",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
