@@ -9,10 +9,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class TaskFragment : Fragment() {
+
     private lateinit var searchTasks: EditText
     private lateinit var filterAll: Button
     private lateinit var filterAssignments: Button
@@ -22,16 +24,21 @@ class TaskFragment : Fragment() {
     private lateinit var emptyTaskMessage: TextView
     private lateinit var backToHome: Button
     private lateinit var adapter: TaskAdapter
+    private lateinit var taskViewModel: TaskAddViewModel
 
     private var selectedFilter = "All"
+    private var allTasks: List<TaskAdd> = emptyList()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View = inflater.inflate(R.layout.fragment_task, container, false)
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        taskViewModel = ViewModelProvider(this)[TaskAddViewModel::class.java]
 
         searchTasks = view.findViewById(R.id.searchTasks)
         filterAll = view.findViewById(R.id.filterAll)
@@ -48,7 +55,7 @@ class TaskFragment : Fragment() {
                     R.id.fragmentContainerView,
                     TaskDetailsFragment().apply {
                         arguments = Bundle().apply {
-                            putLong("taskId", task.id)
+                            putInt("taskId", task.id)
                         }
                     }
                 )
@@ -59,7 +66,6 @@ class TaskFragment : Fragment() {
         taskRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         taskRecyclerView.adapter = adapter
 
-        // Focus Mode navigation
         view.findViewById<TextView>(R.id.navFocus).setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainerView, FocusFragment())
@@ -114,16 +120,16 @@ class TaskFragment : Fragment() {
         backToHome.setOnClickListener {
             startActivity(Intent(requireContext(), HomeActivity::class.java))
         }
-    }
 
-    override fun onResume() {
-        super.onResume()
-        if (::adapter.isInitialized) refreshTasks()
+        taskViewModel.allTasks.observe(viewLifecycleOwner) { tasks ->
+            allTasks = tasks
+            refreshTasks()
+        }
     }
 
     private fun refreshTasks() {
         val query = searchTasks.text.toString().trim().lowercase()
-        val allTasks = TaskStorage.getTasks(requireContext())
+
         val filtered = allTasks.filter { task ->
             val matchesSearch = query.isEmpty() ||
                     task.name.lowercase().contains(query) ||
@@ -131,12 +137,11 @@ class TaskFragment : Fragment() {
 
             val matchesFilter = when (selectedFilter) {
                 "Academic" -> task.category == "Academic"
-                // Your current task form has no separate type field for tests/exams.
-                // These filters therefore match the task name/description.
                 "Tests" -> task.name.contains("test", true) || task.description.contains("test", true)
                 "Exams" -> task.name.contains("exam", true) || task.description.contains("exam", true)
                 else -> true
             }
+
             matchesSearch && matchesFilter
         }
 

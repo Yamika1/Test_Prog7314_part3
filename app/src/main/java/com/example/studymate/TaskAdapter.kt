@@ -7,8 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class TaskAdapter(
-    private var tasks: List<Task>,
-    private val onTaskClick: (Task) -> Unit
+    private var tasks: List<TaskAdd>,
+    private val onTaskClick: (TaskAdd) -> Unit
 ) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -27,13 +27,13 @@ class TaskAdapter(
         val task = tasks[position]
         holder.name.text = task.name
         holder.details.text = "${task.category} • ${task.priority} • Due: ${task.dueDate}"
-        holder.status.text = if (task.completed) "Completed" else "Incomplete"
+        holder.status.text = task.status
         holder.itemView.setOnClickListener { onTaskClick(task) }
     }
 
     override fun getItemCount() = tasks.size
 
-    fun updateTasks(newTasks: List<Task>) {
+    fun updateTasks(newTasks: List<TaskAdd>) {
         tasks = newTasks
         notifyDataSetChanged()
     }

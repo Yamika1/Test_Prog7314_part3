@@ -29,11 +29,17 @@ class TaskDetailsFragment : Fragment() {
 
     private var taskId: Int = 0
     private var currentTask: TaskAdd? = null
+    private var isDeleting = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        taskId = arguments?.getInt("taskId") ?: 0
+        val args = arguments
+        taskId = when (val value = args?.get("taskId")) {
+            is Int -> value
+            is Long -> value.toInt()
+            else -> 0
+        }
     }
 
     override fun onCreateView(
@@ -132,6 +138,7 @@ class TaskDetailsFragment : Fragment() {
         btnDeleteTask.setOnClickListener {
             currentTask?.let { task ->
 
+                isDeleting = true
                 taskViewModel.deleteTask(task)
 
                 Toast.makeText(
@@ -167,6 +174,8 @@ class TaskDetailsFragment : Fragment() {
             .observe(viewLifecycleOwner) { task ->
 
                 if (task == null) {
+
+                    if (isDeleting) return@observe
 
                     Toast.makeText(
                         requireContext(),
