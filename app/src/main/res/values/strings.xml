@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">StudyMate</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="studymate">StudyMate</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="studymate" translatable="false">StudyMate</string>
     <string name="welcome_back">Welcome back!</string>
     <string name="today_s_tasks">Today\'s Tasks</string>
     <string name="no_tasks_for_today">No tasks for today</string>
@@ -20,7 +20,7 @@
     <string name="continue_with_sso">Continue with SSO</string>
     <string name="use_your_existing_account_to_sign_in_securely">Use your existing account to sign in securely.</string>
     <string name="back_to_login">Back to Login</string>
-    <string name="studymate_logo">StudyMate Logo</string>
+    <string name="studymate_logo" translatable="false">StudyMate Logo</string>
     <string name="login">Login</string>
     <string name="username_or_email">Email</string>
     <string name="password">Password</string>
@@ -32,11 +32,11 @@
     <string name="username">Username</string>
     <string name="email_address">Email Address</string>
     <string name="register">Register</string>
-    <string name="_10_home">⌂\nHome</string>
-    <string name="_10_tasks">□\nTasks</string>
-    <string name="_10_add_task">+\nAdd Task</string>
-    <string name="_10_progress">▥\nProgress</string>
-    <string name="_10_settings">⚙\nSettings</string>
+    <string name="_10_home">⌂ Home</string>
+    <string name="_10_tasks">□ Tasks</string>
+    <string name="_10_add_task">+ Add Task</string>
+    <string name="_10_progress">▥ Progress</string>
+    <string name="_10_settings">⚙ Settings</string>
     <string name="add_task">Add Task</string>
     <string name="create_a_new_academic_task">Create a new academic task</string>
     <string name="task_name">Task Name</string>
@@ -56,7 +56,7 @@
     <string name="recent_tasks">Recent Tasks</string>
     <string name="settings">Settings</string>
     <string name="appearance">Appearance</string>
-    <string name="dark_mode">Dark Mode</string>
+    <string name="dark_mode"> Dark Mode</string>
     <string name="dark_mode_will_be_developed_soon">Dark Mode will be developed soon.</string>
     <string name="coming_soon">Coming soon</string>
     <string name="notifications">Notifications</string>
@@ -84,12 +84,35 @@
     <string name="mark_as_complete">Mark as Complete</string>
     <string name="edit_task">Edit Task</string>
     <string name="delete_task">Delete Task</string>
-    <string name="web_client_key">893238927336-vjs333u1n6q40m1oskdqkvdgkn5astn5.apps.googleusercontent.com</string>
+    <string name="web_client_key" translatable="false">893238927336-vjs333u1n6q40m1oskdqkvdgkn5astn5.apps.googleusercontent.com</string>
 
     <string name="already_have_an_account_login">Already have an account? Login Here</string>
     <string name="sign_in_to_continue_to_your_account">Sign in to continue to your account</string>
     <string name="pick_an_account">Pick an account</string>
-    <string name="colon">⋮</string>
-    <string name="plus">+</string>
+    <string name="colon" translatable="false">⋮</string>
+    <string name="plus" translatable="false">+</string>
     <string name="use_another_account">Use another account</string>
+    <string name="open_dark_mode_settings">Open dark mode settings</string>
+    <string name="light_dark">Light / Dark</string>
+    <string name="login_with_fingerprint">LOGIN WITH FINGERPRINT</string>
+    <string name="fingerprint_authenication">Fingerprint authentication</string>
+    <string name="focus">⚡ Focus</string>
+    <string name="focus_mode">Focus Mode</string>
+    <string name="stay_focused_make_progress">Stay focused. Make progress.</string>
+    <string name="select_a_task">Select a task</string>
+    <string name="focus_session">Focus Session</string>
+    <string name="_25_00" translatable="false">25:00</string>
+    <string name="start">Start</string>
+    <string name="pause">Pause</string>
+    <string name="reset">Reset</string>
+    <string name="break_options">Break Options</string>
+    <string name="short_break_5_minutes">Short Break - 5 Minutes</string>
+    <string name="long_break_15_minutes">Long Break - 15 Minutes</string>
+    <string name="your_focus_statistics">Your Focus Statistics</string>
+    <string name="completed_sessions_0">Completed sessions: 0</string>
+    <string name="total_focus_time_0_minutes">Total focus time: 0 minutes</string>
+    <string name="select_a_language_for_application">Select a language for application</string>
+    <string name="afrikaans">Afrikaans</string>
+    <string name="isizulu">IsiZulu</string>
+    <string name="english">English</string>
 </resources>

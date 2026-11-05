@@ -24,7 +24,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Focus Mode"
+                android:text="@string/focus_mode"
                 android:textColor="@color/studymate_primary"
                 android:textSize="28sp"
                 android:textStyle="bold"
@@ -34,7 +34,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Stay focused. Make progress."
+                android:text="@string/stay_focused_make_progress"
                 android:textColor="@color/studymate_text_grey"
                 android:textSize="15sp"
                 android:gravity="center"
@@ -44,7 +44,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Select a task"
+                android:text="@string/select_a_task"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -70,7 +70,7 @@
                     android:id="@+id/sessionType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Focus Session"
+                    android:text="@string/focus_session"
                     android:textColor="@color/studymate_primary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -79,7 +79,7 @@
                     android:id="@+id/timerText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="25:00"
+                    android:text="@string/_25_00"
                     android:textColor="@color/black"
                     android:textSize="56sp"
                     android:textStyle="bold"
@@ -90,7 +90,7 @@
                     android:id="@+id/btnFocusSession"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Focus Session"
+                    android:text="@string/focus_session"
                     android:textColor="@color/white"
                     android:background="@drawable/rounded_black" />
 
@@ -98,7 +98,7 @@
                     android:id="@+id/btnStart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Start"
+                    android:text="@string/start"
                     android:textColor="@color/white"
                     android:background="@drawable/rounded_black"
                     android:layout_marginTop="12dp" />
@@ -107,7 +107,7 @@
                     android:id="@+id/btnPause"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pause"
+                    android:text="@string/pause"
                     android:textColor="@color/white"
                     android:background="@drawable/rounded_black"
                     android:enabled="false"
@@ -117,7 +117,7 @@
                     android:id="@+id/btnReset"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Reset"
+                    android:text="@string/reset"
                     android:textColor="@color/white"
                     android:background="@drawable/rounded_black"
                     android:layout_marginTop="8dp" />
@@ -127,7 +127,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Break Options"
+                android:text="@string/break_options"
                 android:textColor="@color/studymate_primary"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -138,7 +138,7 @@
                 android:id="@+id/btnShortBreak"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Short Break - 5 Minutes"
+                android:text="@string/short_break_5_minutes"
                 android:textColor="@color/white"
                 android:background="@drawable/rounded_black" />
 
@@ -146,7 +146,7 @@
                 android:id="@+id/btnLongBreak"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Long Break - 15 Minutes"
+                android:text="@string/long_break_15_minutes"
                 android:textColor="@color/white"
                 android:background="@drawable/rounded_black"
                 android:layout_marginTop="8dp" />
@@ -154,7 +154,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Your Focus Statistics"
+                android:text="@string/your_focus_statistics"
                 android:textColor="@color/studymate_primary"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -165,7 +165,7 @@
                 android:id="@+id/completedSessions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Completed sessions: 0"
+                android:text="@string/completed_sessions_0"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:padding="8dp" />
@@ -174,7 +174,7 @@
                 android:id="@+id/totalFocusTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Total focus time: 0 minutes"
+                android:text="@string/total_focus_time_0_minutes"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:padding="8dp"
