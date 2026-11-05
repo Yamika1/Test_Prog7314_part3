@@ -8,7 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import com.google.firebase.auth.FirebaseAuth
+import org.intellij.lang.annotations.Language
 
 
 class SettingsFragment : Fragment() {
@@ -17,6 +21,8 @@ class SettingsFragment : Fragment() {
     private lateinit var btnDarkModeArrow: ImageButton
 
     private lateinit var btnLogout: Button
+
+    private lateinit var multiLangLayout: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +44,8 @@ class SettingsFragment : Fragment() {
 
         btnLogout = view.findViewById(R.id.btnLogout)
 
+        multiLangLayout = view.findViewById(R.id.multiLangLayout)
+
 
         btnDarkModeArrow.setOnClickListener {
             startActivity(Intent(requireContext(), DarkMode::class.java))
@@ -47,6 +55,16 @@ class SettingsFragment : Fragment() {
             FirebaseAuth.getInstance().signOut()
             startActivity(Intent(requireContext(), MainActivity::class.java))
         }
+
+        multiLangLayout.setOnClickListener {
+            parentFragmentManager.beginTransaction().replace(R.id.fragmentContainerView,
+                MultiLangFragment()).commit()
+        }
+
+
     }
+
+
+
 
 }

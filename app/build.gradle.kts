@@ -56,6 +56,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.fragment)
+    implementation("androidx.appcompat:appcompat:1.7.1" )
     implementation("com.google.firebase:firebase-auth")
     implementation(platform("com.google.firebase:firebase-bom:34.19.0"))
     implementation(libs.firebase.crashlytics)

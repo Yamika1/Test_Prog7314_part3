@@ -135,7 +135,7 @@
         android:id="@+id/button"
         android:layout_width="334dp"
         android:layout_height="59dp"
-        android:text="Finerprint authenication"
+        android:text="@string/fingerprint_authenication"
         android:textSize="17sp"
         app:layout_constraintBottom_toTopOf="@+id/textviewRegister"
         app:layout_constraintEnd_toEndOf="parent"

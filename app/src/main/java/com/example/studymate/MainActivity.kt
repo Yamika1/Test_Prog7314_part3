@@ -156,7 +156,7 @@ class MainActivity : AppCompatActivity() {
                }
            }catch (e:Exception){
                Toast.makeText(
-                   this@MainActivity, "Google SSO cancelled or failed: ${e.message}",
+                   this@MainActivity, "Failed (Internal Server Error): ${e.message}",
                    Toast.LENGTH_SHORT
                ).show()
            }
@@ -166,7 +166,12 @@ class MainActivity : AppCompatActivity() {
 
     fun startServer(){
         lifecycleScope.launch {
-            RetroFitClient.api.checkHealth()
+            try {
+                RetroFitClient.api.checkHealth()
+            }catch(e: Exception){
+                Toast.makeText(this@MainActivity,"Error: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+
         }
     }
 
