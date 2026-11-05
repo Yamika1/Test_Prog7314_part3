@@ -282,11 +282,11 @@
                     </LinearLayout>
 
                     <ImageButton
-                        android:id="@+id/btnBioLog"
+                        android:id="@+id/btnBiometricArrow"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:contentDescription="@string/multi_language_support"
+                        android:contentDescription="Open biometric settings"
                         android:padding="10dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/ic_arrow_right" />

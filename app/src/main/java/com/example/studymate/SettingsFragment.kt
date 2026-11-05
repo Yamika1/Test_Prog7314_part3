@@ -19,7 +19,7 @@ class SettingsFragment : Fragment() {
 
 
     private lateinit var btnDarkModeArrow: ImageButton
-
+    private lateinit var btnBiometricArrow: ImageButton
     private lateinit var btnLogout: Button
 
     private lateinit var multiLangLayout: LinearLayout
@@ -41,7 +41,7 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         btnDarkModeArrow = view.findViewById(R.id.btnDarkModeArrow)
-
+        btnBiometricArrow = view.findViewById(R.id.btnBiometricArrow)
         btnLogout = view.findViewById(R.id.btnLogout)
 
         multiLangLayout = view.findViewById(R.id.multiLangLayout)
@@ -49,6 +49,9 @@ class SettingsFragment : Fragment() {
 
         btnDarkModeArrow.setOnClickListener {
             startActivity(Intent(requireContext(), DarkMode::class.java))
+        }
+        btnBiometricArrow.setOnClickListener {
+            startActivity(Intent(requireContext(), BiometricSetting::class.java))
         }
 
         btnLogout.setOnClickListener {

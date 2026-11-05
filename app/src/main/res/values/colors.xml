@@ -5,4 +5,13 @@
     <color name="studymate_background">#F7F4FB</color>
     <color name="studymate_primary">#5E4B73</color>
     <color name="studymate_text_grey">#77727D</color>
+
+    <color name="text_primary">#000000</color>
+    <color name="text_heading">#3F3151</color>
+    <color name="text_secondary">#6F6878</color>
+    <color name="text_hint">#555555</color>
+    <color name="accent_text">#5E4B73</color>
+    <color name="card_background">#FFFFFF</color>
+    <color name="input_background">#FAF9FC</color>
+    <color name="input_stroke">#DDD8E2</color>
  </resources>
