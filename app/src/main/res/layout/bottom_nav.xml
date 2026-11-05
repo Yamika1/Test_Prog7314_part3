@@ -19,7 +19,7 @@
         android:layout_weight="1"
         android:text="@string/_10_home"
         android:gravity="center"
-        android:textColor="@color/black"
+        android:textColor="@color/text_primary"
         android:textSize="15sp"
         android:textStyle="bold" />
 
@@ -30,7 +30,7 @@
         android:layout_weight="1"
         android:text="@string/_10_tasks"
         android:gravity="center"
-        android:textColor="@color/black"
+        android:textColor="@color/text_primary"
         android:textSize="15sp"
         android:textStyle="bold"/>
 
@@ -41,7 +41,7 @@
         android:layout_weight="1"
         android:text="@string/_10_add_task"
         android:gravity="center"
-        android:textColor="@color/black"
+        android:textColor="@color/text_primary"
         android:textSize="15sp"
         android:textStyle="bold" />
 
@@ -52,7 +52,7 @@
         android:layout_weight="1"
         android:text="@string/_10_progress"
         android:gravity="center"
-        android:textColor="@color/black"
+        android:textColor="@color/text_primary"
         android:textSize="15sp"
         android:textStyle="bold"/>
 
@@ -64,7 +64,7 @@
         android:layout_weight="1"
         android:text="@string/focus"
         android:gravity="center"
-        android:textColor="@color/studymate_text_grey"
+        android:textColor="@color/text_secondary"
         android:textSize="15sp" />
 
 
@@ -75,7 +75,7 @@
         android:layout_weight="1"
         android:text="@string/_10_settings"
         android:gravity="center"
-        android:textColor="@color/black"
+        android:textColor="@color/text_primary"
         android:textSize="15sp"
         android:textStyle="bold"/>
 

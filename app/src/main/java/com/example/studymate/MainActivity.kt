@@ -1,6 +1,7 @@
 package com.example.studymate
 
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -9,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
@@ -41,9 +43,13 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val night = getSharedPreferences("Mode", Context.MODE_PRIVATE).getBoolean("night", false)
+        AppCompatDelegate.setDefaultNightMode(
+            if (night) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+        )
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-       setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main)
 
         credentialManager = CredentialManager.create(this@MainActivity)
         btnLogin = findViewById(R.id.btnLogin)
@@ -63,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this,"Please fill in all fields",Toast.LENGTH_SHORT).show()
             }
             else{
-           login(email, password)
+                login(email, password)
             }
         }
 
@@ -73,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnSSO.setOnClickListener {
-           googleSSO()
+            googleSSO()
         }
 
         btnFingerprint.setOnClickListener {
@@ -103,74 +109,74 @@ class MainActivity : AppCompatActivity() {
         val googleIdOption = GetGoogleIdOption.Builder().setFilterByAuthorizedAccounts(false)
             .setServerClientId(getString(R.string.web_client_key)).setAutoSelectEnabled(false).build()
 
-          val request = GetCredentialRequest.Builder().addCredentialOption(googleIdOption).build()
+        val request = GetCredentialRequest.Builder().addCredentialOption(googleIdOption).build()
 
-       lifecycleScope.launch {
-           try {
-               val result = credentialManager.getCredential(this@MainActivity, request)
+        lifecycleScope.launch {
+            try {
+                val result = credentialManager.getCredential(this@MainActivity, request)
 
-               val credential = result.credential
+                val credential = result.credential
 
-               val googleCredential = GoogleIdTokenCredential.createFrom(credential.data)
-               val firebaseCredential = GoogleAuthProvider.getCredential(googleCredential.idToken, null)
+                val googleCredential = GoogleIdTokenCredential.createFrom(credential.data)
+                val firebaseCredential = GoogleAuthProvider.getCredential(googleCredential.idToken, null)
 
-               FirebaseAuth.getInstance().signInWithCredential(firebaseCredential)
-                   .addOnSuccessListener { result ->
-                       result.user?.getIdToken(false)?.addOnSuccessListener { tokenResult ->
+                FirebaseAuth.getInstance().signInWithCredential(firebaseCredential)
+                    .addOnSuccessListener { result ->
+                        result.user?.getIdToken(false)?.addOnSuccessListener { tokenResult ->
 
-                           val firebaseIdToken = tokenResult.token
+                            val firebaseIdToken = tokenResult.token
 
-                           val apiRequest = LoginSSORequest(idToken = firebaseIdToken)
-                           RetroFitClient.api.loginSSO(apiRequest).enqueue(object : Callback<LoginResponse?> {
+                            val apiRequest = LoginSSORequest(idToken = firebaseIdToken)
+                            RetroFitClient.api.loginSSO(apiRequest).enqueue(object : Callback<LoginResponse?> {
 
-                                   override fun onResponse(p0: Call<LoginResponse?>, p1: Response<LoginResponse?>) {
-                                       if (p1.isSuccessful) {
-                                           Toast.makeText(this@MainActivity, "Google Sign-In Successful!",
-                                               Toast.LENGTH_SHORT
-                                           ).show()
-                                           val intent = Intent(this@MainActivity, HomeActivity::class.java)
-                                           startActivity(intent)
+                                override fun onResponse(p0: Call<LoginResponse?>, p1: Response<LoginResponse?>) {
+                                    if (p1.isSuccessful) {
+                                        Toast.makeText(this@MainActivity, "Google Sign-In Successful!",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        val intent = Intent(this@MainActivity, HomeActivity::class.java)
+                                        startActivity(intent)
 
-                                       } else {
-                                           Toast.makeText(
-                                               this@MainActivity,
-                                               "Google Sign-In failed. API Error: ${p1.message()}",
-                                               Toast.LENGTH_SHORT
-                                           ).show()
-                                       }
+                                    } else {
+                                        Toast.makeText(
+                                            this@MainActivity,
+                                            "Google Sign-In failed. API Error: ${p1.message()}",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
 
-                                   }
+                                }
 
-                                   override fun onFailure(p0: Call<LoginResponse?>, t: Throwable) {
-                                       Toast.makeText(
-                                           this@MainActivity, "Error: ${t.message}",
-                                           Toast.LENGTH_SHORT
-                                       ).show()
-                                   }
-                               })
+                                override fun onFailure(p0: Call<LoginResponse?>, t: Throwable) {
+                                    Toast.makeText(
+                                        this@MainActivity, "Error: ${t.message}",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            })
 
-                       }?.addOnFailureListener { e ->
-                           Toast.makeText(
-                               this@MainActivity, "SSO Token Failure: ${e.message}",
-                               Toast.LENGTH_SHORT
-                           ).show()
-                       }
+                        }?.addOnFailureListener { e ->
+                            Toast.makeText(
+                                this@MainActivity, "SSO Token Failure: ${e.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
 
-                   }.addOnFailureListener { e ->
-                   Toast.makeText(
-                       this@MainActivity, "SSO Firebase Failure: ${e.message}",
-                       Toast.LENGTH_SHORT
-                   ).show()
-               }
-           }catch (e:Exception){
-               Toast.makeText(
-                   this@MainActivity, "Failed (Internal Server Error): ${e.message}",
-                   Toast.LENGTH_SHORT
-               ).show()
-           }
-       }
+                    }.addOnFailureListener { e ->
+                        Toast.makeText(
+                            this@MainActivity, "SSO Firebase Failure: ${e.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+            }catch (e:Exception){
+                Toast.makeText(
+                    this@MainActivity, "Failed (Internal Server Error): ${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
 
-      }
+    }
 
     fun startServer(){
         lifecycleScope.launch {
@@ -183,28 +189,27 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-            fun login(email: String, password: String) {
-                val request = LoginRequest(email = email, password = password)
-                RetroFitClient.api.login(request).enqueue(object : Callback<LoginResponse?> {
+    fun login(email: String, password: String) {
+        val request = LoginRequest(email = email, password = password)
+        RetroFitClient.api.login(request).enqueue(object : Callback<LoginResponse?> {
 
-                    override fun onResponse(p0: Call<LoginResponse?>, p1: Response<LoginResponse?>
-                    ) {
-                        if (p1.isSuccessful) {
-                            Toast.makeText(this@MainActivity, "Login Successful!", Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this@MainActivity, HomeActivity::class.java)
-                            startActivity(intent)
+            override fun onResponse(p0: Call<LoginResponse?>, p1: Response<LoginResponse?>
+            ) {
+                if (p1.isSuccessful) {
+                    Toast.makeText(this@MainActivity, "Login Successful!", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@MainActivity, HomeActivity::class.java)
+                    startActivity(intent)
 
-                        } else {
-                            Toast.makeText(this@MainActivity, "Login Failed! ${p1.message()}", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-
-
-                    override fun onFailure(p0: Call<LoginResponse?>, t: Throwable) {
-                        Toast.makeText(this@MainActivity, "Error: ${t.message}", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                })
+                } else {
+                    Toast.makeText(this@MainActivity, "Login Failed! ${p1.message()}", Toast.LENGTH_SHORT).show()
+                }
             }
-        }
 
+
+            override fun onFailure(p0: Call<LoginResponse?>, t: Throwable) {
+                Toast.makeText(this@MainActivity, "Error: ${t.message}", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        })
+    }
+}

@@ -74,7 +74,7 @@
         android:layout_marginBottom="91dp"
         android:drawablePadding="10dp"
         android:text="@string/settings"
-        android:textColor="@color/black"
+        android:textColor="@color/text_primary"
         android:textSize="25sp"
         android:textStyle="bold"
         app:drawableStartCompat="@drawable/ic_arrow"

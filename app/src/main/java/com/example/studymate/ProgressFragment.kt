@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -75,7 +76,7 @@ class ProgressFragment : Fragment() {
             val card = CardView(requireContext()).apply {
                 radius = 16f
                 cardElevation = 3f
-                setCardBackgroundColor(android.graphics.Color.WHITE)
+                setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.card_background))
                 layoutParams = ViewGroup.MarginLayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT
@@ -85,7 +86,7 @@ class ProgressFragment : Fragment() {
             val text = TextView(requireContext()).apply {
                 text = "${task.name}\n${if (task.completed) "Completed" else "Incomplete"} • Due: ${task.dueDate}"
                 textSize = 15f
-                setTextColor(android.graphics.Color.BLACK)
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.text_primary))
                 setPadding(20, 20, 20, 20)
             }
             card.addView(text)
